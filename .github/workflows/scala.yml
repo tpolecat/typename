@@ -1,0 +1,10 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: olafurpg/setup-scala@v10
+      - uses: coursier/cache-action@v3
+      - run: sbt clean main/headerCheck compile test
