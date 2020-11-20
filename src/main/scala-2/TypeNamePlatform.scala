@@ -15,6 +15,7 @@ trait TypeNamePlatform {
 
 object TypeNamePlatform {
 
+  // https://stackoverflow.com/questions/15649720
   def typeName_impl[T](c: Context): c.Expr[TypeName[T]] = {
     import c.universe._
     val TypeApply(_, List(typeTree)) = c.macroApplication
