@@ -1,7 +1,9 @@
+
 // Our Scala versions.
-lazy val `scala-3.0`  = "3.0.0-M1"
-lazy val `scala-2.12` = "2.12.12"
-lazy val `scala-2.13` = "2.13.3"
+lazy val `scala-3.0`      = "3.0.0-M2"
+lazy val `scala-3.0-prev` = "3.0.0-M1"
+lazy val `scala-2.12`     = "2.12.12"
+lazy val `scala-2.13`     = "2.13.3"
 
 // Publishing
 name         := "typename"
@@ -24,7 +26,7 @@ headerLicense  := Some(HeaderLicense.Custom(
 
 // Compilation
 scalaVersion       := `scala-2.13`
-crossScalaVersions := Seq(`scala-2.12`, `scala-2.13`, `scala-3.0`)
+crossScalaVersions := Seq(`scala-2.12`, `scala-2.13`, `scala-3.0-prev`, `scala-3.0`)
 Compile / doc     / scalacOptions --= Seq("-Xfatal-warnings")
 Compile / doc     / scalacOptions ++= Seq(
   "-groups",
@@ -33,7 +35,7 @@ Compile / doc     / scalacOptions ++= Seq(
 )
 
 // MUnit
-libraryDependencies += "org.scalameta" %% "munit" % "0.7.18" % Test
+libraryDependencies += "org.scalameta" %% "munit" % "0.7.19" % Test
 testFrameworks += new TestFramework("munit.Framework")
 
 // Scala 2 needs scala-reflect
