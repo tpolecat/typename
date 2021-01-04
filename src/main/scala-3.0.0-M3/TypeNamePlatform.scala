@@ -8,15 +8,14 @@ import scala.quoted._
 
 trait TypeNamePlatform {
 
-  inline given [A] as TypeName[A] =
+  inline given [A]: TypeName[A] =
     ${TypeNamePlatform.impl[A]}
 
 }
 
 object TypeNamePlatform {
 
-  // https://users.scala-lang.org/t/obtaining-the-name-of-a-type-scala-3/6902/7
-  def impl[A](using t: Type[A], ctx: QuoteContext): Expr[TypeName[A]] =
-    '{TypeName[A](${Expr(t.show)})}
+  def impl[A](using t: Type[A], ctx: Quotes): Expr[TypeName[A]] =
+    '{TypeName[A](${Expr(Type.show[A])})}
 
 }
