@@ -1,9 +1,9 @@
 
 // Our Scala versions.
-lazy val `scala-3.0`      = "3.0.0-M3"
-lazy val `scala-3.0-prev` = "3.0.0-M2"
+lazy val `scala-3.0`      = "3.0.0-RC1"
+lazy val `scala-3.0-prev` = "3.0.0-M3"
 lazy val `scala-2.12`     = "2.12.12"
-lazy val `scala-2.13`     = "2.13.4"
+lazy val `scala-2.13`     = "2.13.5"
 
 // Publishing
 name         := "typename"
@@ -35,7 +35,7 @@ Compile / doc     / scalacOptions ++= Seq(
 )
 
 // MUnit
-libraryDependencies += "org.scalameta" %% "munit" % "0.7.20" % Test
+libraryDependencies += "org.scalameta" %% "munit" % "0.7.22" % Test
 testFrameworks += new TestFramework("munit.Framework")
 
 // Scala 2 needs scala-reflect
