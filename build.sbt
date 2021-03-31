@@ -1,7 +1,7 @@
 
 // Our Scala versions.
-lazy val `scala-3.0`      = "3.0.0-RC1"
-lazy val `scala-3.0-prev` = "3.0.0-M3"
+lazy val `scala-3.0`      = "3.0.0-RC2"
+lazy val `scala-3.0-prev` = "3.0.0-RC1"
 lazy val `scala-2.12`     = "2.12.12"
 lazy val `scala-2.13`     = "2.13.5"
 
@@ -17,7 +17,7 @@ developers   := List(
 // Headers
 headerMappings := headerMappings.value + (HeaderFileType.scala -> HeaderCommentStyle.cppStyleLineComment)
 headerLicense  := Some(HeaderLicense.Custom(
-  """|Copyright (c) 2020 by Rob Norris
+  """|Copyright (c) 2020-2021 by Rob Norris
      |This software is licensed under the MIT License (MIT).
      |For more information see LICENSE or https://opensource.org/licenses/MIT
      |""".stripMargin
@@ -35,7 +35,7 @@ Compile / doc     / scalacOptions ++= Seq(
 )
 
 // MUnit
-libraryDependencies += "org.scalameta" %% "munit" % "0.7.22" % Test
+libraryDependencies += "org.scalameta" %% "munit" % "0.7.23" % Test
 testFrameworks += new TestFramework("munit.Framework")
 
 // Scala 2 needs scala-reflect
