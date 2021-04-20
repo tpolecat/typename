@@ -1,7 +1,7 @@
 
 // Our Scala versions.
-lazy val `scala-3.0`      = "3.0.0-RC2"
-lazy val `scala-3.0-prev` = "3.0.0-RC1"
+lazy val `scala-3.0`      = "3.0.0-RC3"
+lazy val `scala-3.0-prev` = "3.0.0-RC2"
 lazy val `scala-2.12`     = "2.12.12"
 lazy val `scala-2.13`     = "2.13.5"
 
@@ -35,15 +35,15 @@ Compile / doc     / scalacOptions ++= Seq(
 )
 
 // MUnit
-libraryDependencies += "org.scalameta" %% "munit" % "0.7.23" % Test
+libraryDependencies += "org.scalameta" %% "munit" % "0.7.25" % Test
 testFrameworks += new TestFramework("munit.Framework")
 
 // Scala 2 needs scala-reflect
-libraryDependencies ++= Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value).filterNot(_ => isDotty.value)
+libraryDependencies ++= Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value).filterNot(_ => scalaVersion.value.startsWith("3."))
 
 // Add some more source directories
-unmanagedSourceDirectories in Compile ++= {
-  val sourceDir = (sourceDirectory in Compile).value
+Compile / unmanagedSourceDirectories ++= {
+  val sourceDir = (Compile / sourceDirectory).value
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((3, _))  => Seq(sourceDir / "scala-3")
     case Some((2, _))  => Seq(sourceDir / "scala-2")
@@ -52,8 +52,8 @@ unmanagedSourceDirectories in Compile ++= {
 }
 
 // Also for test
-unmanagedSourceDirectories in Test ++= {
-  val sourceDir = (sourceDirectory in Test).value
+Test / unmanagedSourceDirectories ++= {
+  val sourceDir = (Test / sourceDirectory).value
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((3, _))  => Seq(sourceDir / "scala-3")
     case Some((2, _))  => Seq(sourceDir / "scala-2")
@@ -64,7 +64,7 @@ unmanagedSourceDirectories in Test ++= {
 // dottydoc really doesn't work at all right now
 Compile / doc / sources := {
   val old = (Compile / doc / sources).value
-  if (isDotty.value)
+  if (scalaVersion.value.startsWith("3."))
     Seq()
   else
     old
