@@ -7,7 +7,7 @@ This is a Scala micro-library that provides:
 
 The intent is that you can use this instead of `TypeTag` or other heavy machinery.
 
-TypeName is compiled for Scala **2.12**, **2.13**, **3.0.0** (see release notes for exact versions).
+TypeName is compiled for Scala **2.12**, **2.13**, and **3.0**.
 
 
 ```scala
