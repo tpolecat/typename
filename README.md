@@ -60,7 +60,7 @@ val res2: String = The type of List(Some(1), None, Some(2)) is scala.collection.
 
 #### Known Limitations
 
-In Scala 2 (this correctly *doesn't* work in Scala 3) you can ask for `typeName[A]` for an unconstrainted type variable `A` and it will happily tell you `"A"`, which is almost certainly a bug if you're doing that. You need to introduce `A` like `[A: TypeName]` if you need its name.
+In Scala 2 (this correctly *doesn't* work in Scala 3) you can ask for `typeName[A]` for an unconstrained type variable `A` and it will happily tell you `"A"`, which is almost certainly a bug if you're doing that. You need to introduce `A` like `[A: TypeName]` if you need its name.
 
 In Scala 3 you sometimes can't get the names of nasty types, for example the type of `List(Vector(1), Set(1))`. I don't know what the limits are.
 
