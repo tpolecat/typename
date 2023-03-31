@@ -2,7 +2,7 @@
 // Our Scala versions.
 lazy val `scala-2.12`     = "2.12.17"
 lazy val `scala-2.13`     = "2.13.10"
-lazy val `scala-3`      = "3.2.2"
+lazy val `scala-3`        = "3.2.2"
 
 // Publishing
 ThisBuild / organization := "org.tpolecat"
@@ -24,8 +24,6 @@ lazy val headerSettings = Seq(
   )
 )
 
-
-
 lazy val root = project.in(file("."))
   .aggregate(typename.jvm, typename.js, typename.native)
   .settings(
@@ -36,7 +34,7 @@ lazy val root = project.in(file("."))
 
 lazy val typename = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .crossType(CrossType.Pure)
-  .in(file("."))
+  .in(file("typename"))
   .settings(
     name := "typename",
 
