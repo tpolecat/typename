@@ -1,8 +1,8 @@
 
 // Our Scala versions.
-lazy val `scala-2.12`     = "2.12.12"
-lazy val `scala-2.13`     = "2.13.5"
-lazy val `scala-3.0`      = "3.0.0"
+lazy val `scala-2.12`     = "2.12.17"
+lazy val `scala-2.13`     = "2.13.10"
+lazy val `scala-3`      = "3.2.2"
 
 // Publishing
 ThisBuild / organization := "org.tpolecat"
@@ -12,9 +12,14 @@ ThisBuild / developers   := List(
   Developer("tpolecat", "Rob Norris", "rob_norris@mac.com", url("http://www.tpolecat.org"))
 )
 
-lazy val root = project.in(file(".")).aggregate(typename.jvm, typename.js)
+lazy val root = project.in(file("."))
+  .aggregate(typename.jvm, typename.js, typename.native)
+  .settings(
+    sonatypeCredentialHost := "s01.oss.sonatype.org",
+    publish / skip := true
+  )
 
-lazy val typename = crossProject(JVMPlatform, JSPlatform)
+lazy val typename = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("."))
   .settings(
@@ -31,7 +36,7 @@ lazy val typename = crossProject(JVMPlatform, JSPlatform)
     ),
     // Compilation
     scalaVersion       := `scala-2.13`,
-    crossScalaVersions := Seq(`scala-2.12`, `scala-2.13`, `scala-3.0`),
+    crossScalaVersions := Seq(`scala-2.12`, `scala-2.13`, `scala-3`),
     Compile / doc     / scalacOptions --= Seq("-Xfatal-warnings"),
     Compile / doc     / scalacOptions ++= Seq(
       "-groups",
@@ -40,18 +45,11 @@ lazy val typename = crossProject(JVMPlatform, JSPlatform)
     ),
 
     // MUnit
-    libraryDependencies += "org.scalameta" %%% "munit" % "0.7.27" % Test,
-    testFrameworks += new TestFramework("munit.Framework"),
+    libraryDependencies += "org.scalameta" %%% "munit" % "1.0.0-M6" % Test,
 
     // Scala 2 needs scala-reflect
     libraryDependencies ++= Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value).filterNot(_ => scalaVersion.value.startsWith("3.")),
 
-    // dottydoc really doesn't work at all right now
-    Compile / doc / sources := {
-      val old = (Compile / doc / sources).value
-      if (scalaVersion.value.startsWith("3."))
-        Seq()
-      else
-        old
-    }
+    // Publishing
+    sonatypeCredentialHost := "s01.oss.sonatype.org"
   ).enablePlugins(AutomateHeaderPlugin)
