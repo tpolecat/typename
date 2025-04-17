@@ -55,4 +55,9 @@ class Test extends munit.FunSuite {
     assertEquals(typeName[List[a.B] forSome { val a: { type B }}], "List[a.B]( forSome { val a: AnyRef{type B} })")
   }
 
+  test("shadowing org package with variable") {
+    val org = "org123"
+    assertEquals(typeName[String], "String")
+  }
+
 }

@@ -19,7 +19,7 @@ object TypeNamePlatform {
   def typeName_impl[T](c: Context): c.Expr[TypeName[T]] = {
     import c.universe._
     val TypeApply(_, List(typeTree)) = c.macroApplication
-    c.Expr(q"org.tpolecat.typename.TypeName(${typeTree.toString})")
+    c.Expr(q"_root_.org.tpolecat.typename.TypeName(${typeTree.toString})")
   }
 
 }
