@@ -1,8 +1,8 @@
 
 // Our Scala versions.
-lazy val `scala-2.12`     = "2.12.17"
-lazy val `scala-2.13`     = "2.13.10"
-lazy val `scala-3`        = "3.2.2"
+lazy val `scala-2.12`     = "2.12.21"
+lazy val `scala-2.13`     = "2.13.18"
+lazy val `scala-3`        = "3.3.7"
 
 // Publishing
 ThisBuild / organization := "org.tpolecat"
@@ -51,7 +51,7 @@ lazy val typename = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     ),
 
     // MUnit
-    libraryDependencies += "org.scalameta" %%% "munit" % "1.0.0-M6" % Test,
+    libraryDependencies += "org.scalameta" %%% "munit" % "1.2.1" % Test,
 
     // Scala 2 needs scala-reflect
     libraryDependencies ++= Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value).filterNot(_ => scalaVersion.value.startsWith("3.")),

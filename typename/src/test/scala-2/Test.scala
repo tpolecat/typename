@@ -48,11 +48,11 @@ class Test extends munit.FunSuite {
   }
 
   test("non-wildcard existential") {
-    assertEquals(typeName[(A, Ordering[A]) forSome { type A }], "(A, Ordering[A])( forSome { type A })")
+    assertEquals(typeName[(A, Ordering[A]) forSome { type A }], "(A, Ordering[A]) forSome { type A }")
   }
 
   test("dependent existential") {
-    assertEquals(typeName[List[a.B] forSome { val a: { type B }}], "List[a.B]( forSome { val a: AnyRef{type B} })")
+    assertEquals(typeName[List[a.B] forSome { val a: { type B }}], "List[a.B] forSome { val a: AnyRef{type B} }")
   }
 
 }
