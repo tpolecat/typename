@@ -27,7 +27,6 @@ lazy val headerSettings = Seq(
 lazy val root = project.in(file("."))
   .aggregate(typename.jvm, typename.js, typename.native)
   .settings(
-    sonatypeCredentialHost := "s01.oss.sonatype.org",
     publish / skip := true,
     headerSettings
   )
@@ -51,11 +50,9 @@ lazy val typename = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     ),
 
     // MUnit
-    libraryDependencies += "org.scalameta" %%% "munit" % "1.2.1" % Test,
+    libraryDependencies += "org.scalameta" %%% "munit" % "1.3.0" % Test,
 
     // Scala 2 needs scala-reflect
     libraryDependencies ++= Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value).filterNot(_ => scalaVersion.value.startsWith("3.")),
 
-    // Publishing
-    sonatypeCredentialHost := "s01.oss.sonatype.org"
   ).enablePlugins(AutomateHeaderPlugin)
